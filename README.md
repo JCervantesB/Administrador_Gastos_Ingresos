@@ -6,6 +6,9 @@ Mini framework desarrollado por el equipo de Joystick SA de CV en México.
 Puedes hacer uso de el para tus proyectos personales o comerciales, es ligero y fácil de implementar para proyectos tanto pequeños como aquellos que requieren escalabilidad y visión a futuro.
 
 ## Changelog
+### v 1.1.2
+- Se modifico la tabla options por opciones ya que ahora "options" es una palabra reservada de MySQL.
+- Se modifico el nombre de la columna "option" por "opcion" ya que ahora es una palabra reservada de MySQL.
 ### v 1.1.1
 - Se corrigió el error en la constante **UPLOADS**, se encontraba mal formateada y con diagonales invertidas adicionales no necesarias que producian errores al cargar archivos.
 - Se mejoró la compatibilidad con Bootstrap 5 Beta en todo el framework.
