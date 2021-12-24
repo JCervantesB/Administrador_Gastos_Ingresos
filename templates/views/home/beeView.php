@@ -17,6 +17,7 @@
         <a class="btn btn-info btn-lg" href="#"><i class="fab fa-github"></i> Github</a>
       </div>
       <div class="mt-5">
+        <p class="text-muted">Codificado <i class="fas fa-code text-info"></i> por <a href="https://github.com/JCervantesB/bee_framework" class="text-warning">JCervantes</a>.</p>
         <p class="text-muted">Desarrollado con <i class="fas fa-heart text-danger"></i> por <a href="http://bit.ly/udemy_joystick" class="text-white">Joystick</a>.</p>
       </div>
     </div>

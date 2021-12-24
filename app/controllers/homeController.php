@@ -13,7 +13,8 @@ class homeController extends Controller {
       'bg'    => 'dark'
     ];
 
-    View::render('bee', $data);
+    //View::render('bee', $data);
+    Redirect::to('movimientos');
   }
 
   function test()

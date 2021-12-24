@@ -65,15 +65,15 @@ class ajaxController extends Controller {
   {
     try {
       $movements          = new movementModel;
-      $movs               = $movements->all();
+      $movs               = $movements->all_by_date();
 
-      // $taxes              = (float) get_opcion('taxes') < 0 ? 16 : get_opcion('taxes');
-      // $use_taxes          = get_opcion('use_taxes') === 'Si' ? true : false;
+      $taxes              = (float) get_option('taxes') < 0 ? 16 : get_option('taxes');
+      $use_taxes          = get_option('use_taxes') === 'Si' ? true : false;
       
       $total_movements    = $movs[0]['total'];
       $total              = $movs[0]['total_incomes'] - $movs[0]['total_expenses'];
-      $subtotal           = $total / 1.16;
-      $taxes              = $subtotal * 0.16;
+      $subtotal           = $use_taxes ? $total / (1.0 + ($taxes / 100)) : $total;
+      $taxes              = $subtotal * ($taxes / 100);
       
       $calculations       = [
         'total_movements' => $total_movements,
@@ -81,7 +81,6 @@ class ajaxController extends Controller {
         'taxes'           => $taxes,
         'total'           => $total
       ];
-      
 
       $data = get_module('movements', ['movements' => $movs, 'cal' => $calculations]);
       json_output(json_build(200, $data));

@@ -1,6 +1,7 @@
 <!-- footer v2 -->
 <footer class="my-5 pt-5 text-muted text-center text-small">
   <p class="mb-1"><?php echo get_sitename().' '.date('Y').' &copy; Todos los derechos reservados.'; ?></p>
+  <p class="text-muted">Codificado <i class="fas fa-code text-info"></i> por <a href="https://github.com/JCervantesB/bee_framework" class="text-warning">JCervantes</a>.</p>
 </footer>
 
 <!-- scripts -->

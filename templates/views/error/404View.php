@@ -10,6 +10,7 @@
         <a class="btn btn-success btn-lg" href="home"><i class="fas fa-undo"></i> Regresar</a>
       </div>
       <div class="mt-5">
+        <p class="text-muted">Codificado <i class="fas fa-code text-info"></i> por <a href="https://github.com/JCervantesB/bee_framework" class="text-warning">JCervantes</a>.</p>
         <p class="text-muted">Desarrollado con <i class="fas fa-heart text-danger"></i> por <a href="http://bit.ly/udemy_joystick" class="text-white">Joystick</a>.</p>
       </div>
     </div>
