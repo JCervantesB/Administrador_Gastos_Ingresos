@@ -1,66 +1,103 @@
 <?php
-// Este archivo contiene todas las funciones requeridas en este framework
 
 function to_object($array) {
-    // Convertir un array en un objeto
-    return json_decode(json_encode($array));
+  return json_decode(json_encode($array));
 }
 
-/**
- * Regresa el nombre de nuestra aplicación
- *
- * @return string
- */
 function get_sitename() {
-    return 'Bee Framework';
+  return 'Bee framework';
 }
 
-/**
- * Devuelve el email general del sistema
- *
- * @return string
- */
-function get_siteemail() {
-  return 'jslocal@localhost.com';
-}
-
-/**
- * Regresa la fecha de estos momentos
- *
- * @return string
- */
 function now() {
   return date('Y-m-d H:i:s');
 }
 
-/**
- * Carga un recurso o imagen que esté directamente
- * en la carpeta de imágenes de bee framework
- *
- * @param string $filename
- * @return string
- */
-function get_image($filename)
-{
-	if (!is_file(IMAGES_PATH.$filename)) {
-		return IMAGES.'broken.png';
-	}
+function json_output($json, $die = true) {
+  header('Access-Control-Allow-Origin: *');
+  header('Content-type: application/json;charset=utf-8');
 
-	return IMAGES.$filename;
+  if(is_array($json)){
+    $json = json_encode($json);
+  }
+
+  echo $json;
+  if($die) {
+    die;
+  }
+  
+  return true;
 }
 
-/**
- * Muestra en pantalla los valores pasados
- *
- * @param mixed $data
- * @return void
- */
-function debug($data) {
-  echo '<pre>';
-  if(is_array($data) || is_object($data)) {
-    print_r($data);
-  } else {
-    echo $data;
+function json_build($status = 200, $data = null, $msg = '') {
+  if(empty($msg) || $msg == '') {
+    switch ($status) {
+      case 200:
+        $msg = 'OK';
+        break;
+      case 201:
+        $msg = 'Created';
+        break;
+      case 400:
+        $msg = 'Invalid request';
+        break;
+      case 403:
+        $msg = 'Access denied';
+        break;
+      case 404:
+        $msg = 'Not found';
+        break;
+      case 500:
+        $msg = 'Internal Server Error';
+        break;
+      case 550:
+        $msg = 'Permission denied';
+        break;
+      default:
+        break;
+    }
   }
-  echo '</pre>';
+
+  http_response_code($status);
+
+  $json =
+  [
+    'status' => $status,
+    'error'  => false,
+    'msg'    => $msg,
+    'data'   => $data
+  ];
+
+  $error_codes = [400,403,404,405,500];
+
+  if(in_array($status , $error_codes)){
+    $json['error'] = true;
+  }
+
+  return json_encode($json);
+}
+
+function get_module($view, $data = []) {
+  $file_to_include = MODULES.$view.'Module.php';
+	$output = '';
+	
+	// Por si queremos trabajar con objeto
+	$d = to_object($data);
+	
+	if(!is_file($file_to_include)) {
+		return false;
+	}
+
+	ob_start();
+	require_once $file_to_include;
+	$output = ob_get_clean();
+
+	return $output;
+}
+
+function money($amount, $symbol = '$') {
+  return $symbol.number_format($amount, 2, '.', ',');
+}
+
+function get_option($option) {
+  return optionModel::search($option);
 }

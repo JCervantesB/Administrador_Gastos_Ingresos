@@ -11,7 +11,7 @@ $(document).ready(function() {
   function bee_add_movement(event) {
     event.preventDefault();
 
-    var form    = $('.bee_add_movement'),
+    const form    = $('.bee_add_movement'),
     hook        = 'bee_hook',
     action      = 'add',
     data        = new FormData(form.get(0)),
@@ -69,7 +69,7 @@ $(document).ready(function() {
   // Cargar movimientos
   bee_get_movements();
   function bee_get_movements() {
-    var wrapper = $('.bee_wrapper_movements'),
+    const wrapper = $('.bee_wrapper_movements'),
     hook        = 'bee_hook',
     action      = 'load';
 
@@ -107,7 +107,7 @@ $(document).ready(function() {
   // Actualizar un movimiento
   $('body').on('dblclick', '.bee_movement', bee_update_movement);
   function bee_update_movement(event) {
-    var li              = $(this),
+    const li              = $(this),
     id                  = li.data('id'),
     hook                = 'bee_hook',
     action              = 'get',
@@ -144,7 +144,7 @@ $(document).ready(function() {
   function bee_save_movement(event) {
     event.preventDefault();
 
-    var form    = $('.bee_save_movement'),
+    const form    = $('.bee_save_movement'),
     hook        = 'bee_hook',
     action      = 'update',
     data        = new FormData(form.get(0)),
@@ -205,7 +205,7 @@ $(document).ready(function() {
   // Borrar un movimiento
   $('body').on('click', '.bee_delete_movement', bee_delete_movement);
   function bee_delete_movement(event) {
-    var boton   = $(this),
+    const boton   = $(this),
     id          = boton.data('id'),
     hook        = 'bee_hook',
     action      = 'delete',
@@ -243,7 +243,7 @@ $(document).ready(function() {
   function bee_save_options(event) {
     event.preventDefault();
 
-    var form = $('.bee_save_options'),
+    const form = $('.bee_save_options'),
     data     = new FormData(form.get(0)),
     hook     = 'bee_hook',
     action   = 'add';
@@ -251,6 +251,12 @@ $(document).ready(function() {
     data.append('action', action);
 
     // AJAX
+    /**
+     * Realizamos una peticion Ajax para Crear o actualizar Opciones
+     * Si la opcion no existe la creamos y recibimos una respuesta 201
+     * Si ya existe la actualizamos y recibimos una respuesta 200
+     * Caso contrario recibimos un error
+     */
     $.ajax({
       url: 'ajax/bee_save_options',
       type: 'post',

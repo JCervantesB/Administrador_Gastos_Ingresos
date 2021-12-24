@@ -19,7 +19,7 @@
                 <label for="use_taxes">Calcular Impuestos</label>
                 <select name="use_taxes" id="use_taxes" class="form-control">
                   <?php foreach (['Si','No'] as $opt): ?>
-                  <option value="<?php echo $opt ?>" <?php echo get_option('use_taxes') === $opt ? 'selected' : ''; ?>><?php echo $opt; ?></option>
+                  <option value="<?php echo $opt ?>" ><?php echo $opt; ?></option>
                   <?php endforeach; ?>
                 </select>
               </div>
@@ -29,14 +29,14 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">%</span>
                   </div>
-                  <input type="text" class="form-control" name="taxes" value="<?php echo get_option('taxes'); ?>" id="taxes">
+                  <input type="text" class="form-control" name="taxes" value="" id="taxes">
                 </div>
               </div>
               <div class="col-4">
                 <label for="coin">Moneda</label>
                 <select name="coin" id="coin" class="form-control">
                   <?php foreach (get_coins() as $coin): ?>
-                    <option value="<?php echo $coin; ?>" <?php echo get_option('coin') === $coin ? 'selected' : ''; ?>><?php echo $coin; ?></option>
+                    <option value="<?php echo $coin; ?>" ><?php echo $coin; ?></option>
                   <?php endforeach; ?>
                 </select>
               </div>

@@ -41,11 +41,12 @@ class movementModel extends Model
   public function all()
   {
     $sql = 'SELECT *,
-    COUNT(id) AS total,
+    (SELECT COUNT(id) FROM movements) AS total,
     (SELECT SUM(amount) FROM movements WHERE type = "income") AS total_incomes,
     (SELECT SUM(amount) FROM movements WHERE type = "expense") AS total_expenses
     FROM movements 
     ORDER BY id DESC';
+
     try {
       return ($rows = parent::query($sql)) ? $rows : false;
     } catch (Exception $e) {

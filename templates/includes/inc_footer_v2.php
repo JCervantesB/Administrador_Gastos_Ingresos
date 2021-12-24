@@ -31,6 +31,8 @@
 </script>
 <!-- toastr js -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<!-- sweetalert2 -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- waitme js -->
 <script src="<?php echo PLUGINS.'waitme/waitMe.min.js'; ?>"></script>

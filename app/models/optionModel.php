@@ -48,14 +48,15 @@ class optionModel extends Model
 
   /**
    * Método para cargar un registro de la base de datos usando su id
-   *
+   * Donde le pasamos una opcion y su valor en la columna val
+   * 
    * @return void
    */
   public function one()
   {
     $sql = 'SELECT * FROM options WHERE option=:option LIMIT 1';
     try {
-      return ($rows = parent::query($sql, ['option' => $this->option])) ? $rows[0] : false;
+      return ($rows = parent::query($sql, ['option' => $this->option])) ? $rows[0]['val'] : false;
     } catch (Exception $e) {
       throw $e;
     }
@@ -105,7 +106,7 @@ class optionModel extends Model
     $self->val    = $val;
 
     // Si no existe, guardar
-    if(!$option = $self->one()) {
+    if(!$self->one()) {
       return ($self->id = $self->add()) ? $self->id : false;
     }
 
@@ -127,6 +128,6 @@ class optionModel extends Model
     // optionModel::search('sidebar_alignment') -> right;
     $self = new self();
     $self->option = $option;
-    return ($res = $self->one()) ? $res['val'] : false;
+    return $self->one();
   }
 }
