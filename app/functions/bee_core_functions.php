@@ -98,6 +98,6 @@ function money($amount, $symbol = '$') {
   return $symbol.number_format($amount, 2, '.', ',');
 }
 
-function get_option($option) {
-  return optionModel::search($option);
+function get_option($opcion) {
+  return optionModel::search($opcion);
 }

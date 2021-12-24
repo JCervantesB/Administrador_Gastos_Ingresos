@@ -4,7 +4,7 @@ class optionModel extends Model
 {
 
   public $id;
-  public $option;
+  public $opcion;
   public $val;
   public $created_at;
   public $updated_at;
@@ -16,10 +16,10 @@ class optionModel extends Model
    */
   public function add()
   {
-    $sql = 'INSERT INTO options (option, val, created_at) VALUES (:option, :val, :created_at)';
+    $sql = 'INSERT INTO opciones (opcion, val, created_at) VALUES (:opcion, :val, :created_at)';
     $data = 
     [
-      'option'       => $this->option,
+      'opcion'       => $this->opcion,
       'val'          => $this->val,
       'created_at'   => now()
     ];
@@ -38,7 +38,7 @@ class optionModel extends Model
    */
   public function all()
   {
-    $sql = 'SELECT * FROM options ORDER BY id DESC';
+    $sql = 'SELECT * FROM opciones ORDER BY id DESC';
     try {
       return ($rows = parent::query($sql)) ? $rows : false;
     } catch (Exception $e) {
@@ -54,9 +54,9 @@ class optionModel extends Model
    */
   public function one()
   {
-    $sql = 'SELECT * FROM options WHERE option=:option LIMIT 1';
+    $sql = 'SELECT * FROM opciones WHERE opcion=:opcion LIMIT 1';
     try {
-      return ($rows = parent::query($sql, ['option' => $this->option])) ? $rows[0]['val'] : false;
+      return ($rows = parent::query($sql, ['opcion' => $this->opcion])) ? $rows[0] : false;
     } catch (Exception $e) {
       throw $e;
     }
@@ -69,10 +69,10 @@ class optionModel extends Model
    */
   public function update()
   {
-    $sql = 'UPDATE options SET val=:val WHERE option=:option';
+    $sql = 'UPDATE opciones SET val=:val WHERE opcion=:opcion';
     $data = 
     [
-      'option' => $this->option,
+      'opcion' => $this->opcion,
       'val'    => $this->val,
     ];
 
@@ -90,23 +90,23 @@ class optionModel extends Model
    */
   public function delete()
   {
-    $sql = 'DELETE FROM options WHERE option = :option LIMIT 1';
+    $sql = 'DELETE FROM opciones WHERE opcion = :opcion LIMIT 1';
     try {
-      return (parent::query($sql, ['option' => $this->option])) ? true : false;
+      return (parent::query($sql, ['opcion' => $this->opcion])) ? true : false;
     } catch (Exception $e) {
       throw $e;
     }
   }
 
-  public static function save($option, $val)
+  public static function save($opcion, $val)
   {
     // Verificar si existe la opción
     $self         = new self();
-    $self->option = $option;
+    $self->opcion = $opcion;
     $self->val    = $val;
 
     // Si no existe, guardar
-    if(!$self->one()) {
+    if(!$opcion = $self->one()) {
       return ($self->id = $self->add()) ? $self->id : false;
     }
 
@@ -117,17 +117,17 @@ class optionModel extends Model
   /**
    * Método para buscar el valor de una opción determinada de forma estática
    *
-   * @param string $option
+   * @param string $opcion
    * @return void
    */
-  public static function search($option)
+  public static function search($opcion)
   {
     // color
     // #ebebeb
-    // optionModel::search('color') -> #ebebeb;
-    // optionModel::search('sidebar_alignment') -> right;
+    // opcionModel::search('color') -> #ebebeb;
+    // opcionModel::search('sidebar_alignment') -> right;
     $self = new self();
-    $self->option = $option;
-    return $self->one();
+    $self->opcion = $opcion;
+    return ($res = $self->one()) ? $res['val'] : false;
   }
 }

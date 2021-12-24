@@ -265,7 +265,9 @@ $(document).ready(function() {
       processData: false,
       cache: false,
       data : data,
+      
       beforeSend: function() {
+        console.log(data);
         form.waitMe();
       }
     }).done(function(res) {

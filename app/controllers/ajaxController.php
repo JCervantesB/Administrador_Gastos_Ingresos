@@ -67,8 +67,8 @@ class ajaxController extends Controller {
       $movements          = new movementModel;
       $movs               = $movements->all();
 
-      // $taxes              = (float) get_option('taxes') < 0 ? 16 : get_option('taxes');
-      // $use_taxes          = get_option('use_taxes') === 'Si' ? true : false;
+      // $taxes              = (float) get_opcion('taxes') < 0 ? 16 : get_opcion('taxes');
+      // $use_taxes          = get_opcion('use_taxes') === 'Si' ? true : false;
       
       $total_movements    = $movs[0]['total'];
       $total              = $movs[0]['total_incomes'] - $movs[0]['total_expenses'];
@@ -148,16 +148,16 @@ class ajaxController extends Controller {
 
   function bee_save_options()
   {
-    $options =
+    $opciones =
     [
       'use_taxes' => $_POST['use_taxes'],
       'taxes'     => (float) $_POST['taxes'],
       'coin'      => $_POST['coin']
     ];
 
-    foreach ($options as $k => $option) {
+    foreach ($opciones as $k => $opcion) {
       try {
-        if(!$id = optionModel::save($k, $option)) {
+        if(!$id = optionModel::save($k, $opcion)) {
           json_output(json_build(400, null, sprintf('Hubo error al guardar la opción %s', $k)));
         }
     
